@@ -154,7 +154,7 @@ while True:
 		delanteros() #Llamada a la función paises
 	elif opcion=="9":#Condición de la quinta opción
 		print(Fore.GREEN + Style.BRIGHT +("Saliendo de la Aplicación..."))
-		break #Salimos del programa
+		break #Salimos de la aplicación
 	else:
 		input(Fore.GREEN + Style.BRIGHT +"No has pulsado ninguna opción correcta...\nPulsa cualquier tecla para continuar") #En caso de no introducir una opción disponible nos muestra un error y vuelve al bucle.
 """
