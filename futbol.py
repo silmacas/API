@@ -264,6 +264,7 @@ def partido(): #función partido, según la estadística de los puntos y partido
 	print(Fore.MAGENTA + "Elige dos equipos de esta liga para que jueguen un partido: \n")
 	equipolocal=input("Introduce el primer equipo: ")
 	equipovisitante=input("Introduce el segundo equipo: ")
+	error=False
 	for equipo in data["standing"]:
 		if equipo["teamName"]==equipolocal:
 			puntoslocal=equipo["points"]
@@ -273,25 +274,30 @@ def partido(): #función partido, según la estadística de los puntos y partido
 			puntosvisit=equipo["points"]
 			perdidosvisit=equipo["draws"]
 			print("Puntos visitante:",puntosvisit,perdidosvisit)
-	if puntoslocal > puntosvisit and perdidoslocal < perdidosvisit:
-		print(Fore.YELLOW + Style.BRIGHT +"\nHa ganado el", Fore.YELLOW + Style.BRIGHT + equipolocal) 
-	elif puntoslocal > puntosvisit and perdidoslocal > perdidosvisit:
-		print(Fore.YELLOW + Style.BRIGHT + "\nSe ha producido un empate entre estos dos equipos.\n")
-	elif puntoslocal > puntosvisit and perdidoslocal == perdidosvisit:
-		print(Fore.YELLOW + Style.BRIGHT + "\nHa ganado el", Fore.YELLOW + Style.BRIGHT + equipolocal)
-	elif puntoslocal < puntosvisit and perdidoslocal < perdidosvisit:
-		print(Fore.YELLOW + Style.BRIGHT + "\nSe ha producido un empate entre estos dos equipos.\n")
-	elif puntoslocal < puntosvisit and perdidoslocal > perdidosvisit:
-		print(Fore.YELLOW + Style.BRIGHT + "\nHa ganado el", Fore.YELLOW + Style.BRIGHT + equipovisitante)
-	elif puntoslocal < puntosvisit and perdidoslocal == perdidosvisit:
-		print(Fore.YELLOW + Style.BRIGHT + "\nHa ganado el", Fore.YELLOW + Style.BRIGHT + equipovisitante)
-	elif puntoslocal == puntosvisit and perdidoslocal < perdidosvisit:
-		print(Fore.YELLOW + Style.BRIGHT +"\nHa ganado el", Fore.YELLOW + Style.BRIGHT + equipolocal)
-	elif puntoslocal == puntosvisit and perdidoslocal > perdidosvisit:
-		print(Fore.YELLOW + Style.BRIGHT + "\nHa ganado el", Fore.YELLOW + Style.BRIGHT + equipovisitante)
-	elif puntoslocal == puntosvisit and perdidoslocal == perdidosvisit:
-		print(Fore.YELLOW + Style.BRIGHT + "\nSe ha producido un empate entre estos dos equipos.\n")
-
+		else:
+			error=True
+	if error:
+		input("\nNombre de equipo incorrecto! \nPulse Intro para continuar: ")
+		partido()
+	else:
+		if puntoslocal > puntosvisit and perdidoslocal < perdidosvisit:
+			print(Fore.YELLOW + Style.BRIGHT +"\nHa ganado el", Fore.YELLOW + Style.BRIGHT + equipolocal) 
+		elif puntoslocal > puntosvisit and perdidoslocal > perdidosvisit:
+			print(Fore.YELLOW + Style.BRIGHT + "\nSe ha producido un empate entre estos dos equipos.\n")
+		elif puntoslocal > puntosvisit and perdidoslocal == perdidosvisit:
+			print(Fore.YELLOW + Style.BRIGHT + "\nHa ganado el", Fore.YELLOW + Style.BRIGHT + equipolocal)
+		elif puntoslocal < puntosvisit and perdidoslocal < perdidosvisit:
+			print(Fore.YELLOW + Style.BRIGHT + "\nSe ha producido un empate entre estos dos equipos.\n")
+		elif puntoslocal < puntosvisit and perdidoslocal > perdidosvisit:
+			print(Fore.YELLOW + Style.BRIGHT + "\nHa ganado el", Fore.YELLOW + Style.BRIGHT + equipovisitante)
+		elif puntoslocal < puntosvisit and perdidoslocal == perdidosvisit:
+			print(Fore.YELLOW + Style.BRIGHT + "\nHa ganado el", Fore.YELLOW + Style.BRIGHT + equipovisitante)
+		elif puntoslocal == puntosvisit and perdidoslocal < perdidosvisit:
+			print(Fore.YELLOW + Style.BRIGHT +"\nHa ganado el", Fore.YELLOW + Style.BRIGHT + equipolocal)
+		elif puntoslocal == puntosvisit and perdidoslocal > perdidosvisit:
+			print(Fore.YELLOW + Style.BRIGHT + "\nHa ganado el", Fore.YELLOW + Style.BRIGHT + equipovisitante)
+		elif puntoslocal == puntosvisit and perdidoslocal == perdidosvisit:
+			print(Fore.YELLOW + Style.BRIGHT + "\nSe ha producido un empate entre estos dos equipos.\n")
 """
 Un equipo gana cuando:										
 	-Tiene más puntos y menos partidos perdidos
