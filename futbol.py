@@ -15,8 +15,8 @@ def menu (opcion):
 	print (Fore.CYAN + Style.BRIGHT +("2. Mostrar los 3 primeros clasificados de la Bundesliga."))
 	print (Fore.CYAN + Style.BRIGHT +("3. Edad, precio y nacionalidad de un jugador del Real Betis Balompié."))
 	print (Fore.CYAN + Style.BRIGHT +("4. Mostrar el nombre de los delanteros del Arsenal FC."))
-	print (Fore.CYAN + Style.BRIGHT +("5. Mostrar el resultado de un partido de la liga italiana de dos equipos que pidamos por teclado."))
-	print (Fore.CYAN + Style.BRIGHT +("6. Mostrar los puntos y la posicion de un equipo de la liga portuguesa que introduzcamos por teclado."))
+	print (Fore.CYAN + Style.BRIGHT +("5. Mostrar el resultado de un partido de la liga italiana de dos equipos."))
+	print (Fore.CYAN + Style.BRIGHT +("6. Mostrar los puntos y la posicion de un equipo de la liga portuguesa."))
 	print (Fore.CYAN + Style.BRIGHT +("7. Mostrar el nombre de un equipo de la liga española con partidos(perdidos=1, empatados=2 o ganados=3) con el número que introduzca el usuario."))
 	print (Fore.CYAN + Style.BRIGHT +("8. Vamos a jugar un partido, elige dos equipos de la liga inglesa."))
 	print (Fore.CYAN + Style.BRIGHT +("9. Salir."))
@@ -79,7 +79,7 @@ def betis (): #Esta funcion muestra una lista de jugadores del betis y del que i
 	for jugador in data["players"]: #Recorremos los jugadores
 		print(Style.BRIGHT + Fore.MAGENTA + jugador["name"]) #mostramos la lista de jugadores
 	print(" ")
-	nombrejugador=str(input(Fore.GREEN + Style.BRIGHT +"Escribe el nombre de uno de estos jugadores: "))
+	nombrejugador=str(input("Escribe el nombre de uno de estos jugadores: "))
 	for jugador in data["players"]:
 		if jugador["name"]==nombrejugador:
 			year, month, day = map(int, jugador["dateOfBirth"].split("-")) #esta variable coge la fecha en cadena y le quita el "-"
@@ -90,11 +90,11 @@ def betis (): #Esta funcion muestra una lista de jugadores del betis y del que i
 			edadN = diferencia_dias / 365.2425 #valor gregoriano de un año
 			edad = int(edadN) # pasamos la variable anterior que es decimal a entero
 			print(" ")
-			print("\nLa edad de", Fore.GREEN + jugador["name"], "es de: ", Back.YELLOW + Style.BRIGHT +  str(edad), Back.YELLOW + Style.BRIGHT + "años.")
-			print("\nSu nacionalidad es: ", Back.YELLOW + Style.BRIGHT + jugador["nationality"] )
+			print("\nLa edad de", Fore.GREEN + jugador["name"], "es de: ",Style.BRIGHT + Fore.YELLOW + str(edad), Fore.YELLOW + Style.BRIGHT + "años.")
+			print("\nSu nacionalidad es: ", Style.BRIGHT + Fore.YELLOW + jugador["nationality"] )
 			if jugador["marketValue"] is not None:
 				print(" ")
-				print("\nEl precio de este jugador actualmente es de : ", Back.YELLOW + Style.BRIGHT + jugador["marketValue"])
+				print("\nEl precio de este jugador actualmente es de : ", Fore.YELLOW + Style.BRIGHT + jugador["marketValue"])
 			else:
 				print(Fore.RED + Back.YELLOW + Style.BRIGHT +"\nEn estos momentos no podemos facilitar el precio del jugador.")			
 				print(" ")	
