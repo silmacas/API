@@ -12,14 +12,14 @@ def menu (opcion):
 	print (Fore.RED + Style.BRIGHT +("---MENÚ OPCIONES API FÚTBOL----"))
 	print (Fore.RED + Style.BRIGHT +("-------------------------------"))
 	print (Fore.CYAN + Style.BRIGHT +("1. Posición y duración del contrato de un jugador del Paris Saint-Germain que pidamos por teclado."))
-	print (Fore.CYAN + Style.BRIGHT +("2. Mostrar los 3 primeros clasificados de la Bundesliga."))
-	print (Fore.CYAN + Style.BRIGHT +("3. Edad, precio y nacionalidad de un jugador del Real Betis Balompié."))
-	print (Fore.CYAN + Style.BRIGHT +("4. Mostrar el nombre de los delanteros del Arsenal FC."))
-	print (Fore.CYAN + Style.BRIGHT +("5. Mostrar el resultado de un partido de la liga italiana de dos equipos."))
-	print (Fore.CYAN + Style.BRIGHT +("6. Mostrar los puntos y la posicion de un equipo de la liga portuguesa."))
-	print (Fore.CYAN + Style.BRIGHT +("7. Mostrar el nombre de un equipo de la liga española con partidos(perdidos=1, empatados=2 o ganados=3) con el número que introduzca el usuario."))
-	print (Fore.CYAN + Style.BRIGHT +("8. Vamos a jugar un partido, elige dos equipos de la liga inglesa."))
-	print (Fore.CYAN + Style.BRIGHT +("9. Salir."))
+	print (Fore.CYAN + Style.BRIGHT +("\n2. Mostrar los 3 primeros clasificados de la Bundesliga."))
+	print (Fore.CYAN + Style.BRIGHT +("\n3. Edad, precio y nacionalidad de un jugador del Real Betis Balompié."))
+	print (Fore.CYAN + Style.BRIGHT +("\n4. Mostrar el nombre de los delanteros del Arsenal FC."))
+	print (Fore.CYAN + Style.BRIGHT +("\n5. Mostrar el resultado de un partido de la liga italiana de dos equipos."))
+	print (Fore.CYAN + Style.BRIGHT +("\n6. Mostrar los puntos y la posicion de un equipo de la liga portuguesa."))
+	print (Fore.CYAN + Style.BRIGHT +("\n7. Mostrar equipo/s de la liga española con mayor número de partidos ganados,perdidos o empatados."))
+	print (Fore.CYAN + Style.BRIGHT +("\n8. Vamos a jugar un partido, elige dos equipos de la liga inglesa."))
+	print (Fore.CYAN + Style.BRIGHT +("\n9. Salir."))
 	opcion = input("\nSelecciona una opción  del menú: ") #Seleccionamos el número y lo asignamos a la variable opción
 	return opcion #retornamos el resultado de la opción para trabajar con ella en el bucle while
 
