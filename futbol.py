@@ -26,7 +26,7 @@ def menu (opcion):
 
 def posicion (): # Funcion opcion 1 que busca dentro de la API los jugadores que queramos buscar
 #busqueda jugador PSG
-	response = requests.get('http://api.football-data.org/v1/teams/524/players' ,
+	response = requests.get('http://api.football-data.org/v1/teams/524/players',
 	headers={
 	"X-Auth-Token": "fe3a09bd5fcc47b0bf29d2645117fe1e",
 	"Accept": "application/json"
@@ -37,6 +37,7 @@ def posicion (): # Funcion opcion 1 que busca dentro de la API los jugadores que
 	print(" ")
 	print(Back.RED + Style.BRIGHT + "------ Lista de jugadores del PSG que no han ido al Mundial de Rusia -------")
 	print(" ")
+	error=0
 	for jugador in data["players"]:
 		print(Style.BRIGHT + Fore.BLACK + jugador["name"])
 	print(" ")
@@ -47,6 +48,11 @@ def posicion (): # Funcion opcion 1 que busca dentro de la API los jugadores que
 			print("La posición de", Fore.YELLOW + jugador["name"], "es: ", Fore.BLUE + Style.BRIGHT + jugador["position"])
 			print(Fore.YELLOW + jugador["name"], "tiene contrato con el PSG hasta: ", Fore.BLUE + Style.BRIGHT + jugador["contractUntil"] )
 			print(" ")
+			error+=1
+	if error<1:
+		input("\nNombre incorrecto! \nPulse Intro para continuar: ")
+		posicion()
+			
 def clasi3 (): #Funcion clasi3 que busca dentro de la API los 3 primeros clasificados de la Bundesliga.
 
 	response = requests.get('http://api.football-data.org/v1/competitions/452/leagueTable' ,
@@ -76,6 +82,7 @@ def betis (): #Esta funcion muestra una lista de jugadores del betis y del que i
 	print(Back.GREEN + Style.BRIGHT + "Lista de jugadores del Betis que no han ido al Mundial de Rusia")
 	print(Back.GREEN + Style.BRIGHT + "***************************************************************")
 	print(" ")
+	error=0
 	for jugador in data["players"]: #Recorremos los jugadores
 		print(Style.BRIGHT + Fore.MAGENTA + jugador["name"]) #mostramos la lista de jugadores
 	print(" ")
@@ -92,13 +99,16 @@ def betis (): #Esta funcion muestra una lista de jugadores del betis y del que i
 			print(" ")
 			print("\nLa edad de", Fore.GREEN + jugador["name"], "es de: ",Style.BRIGHT + Fore.YELLOW + str(edad), Fore.YELLOW + Style.BRIGHT + "años.")
 			print("\nSu nacionalidad es: ", Style.BRIGHT + Fore.YELLOW + jugador["nationality"] )
+			error+=1
 			if jugador["marketValue"] is not None:
 				print(" ")
 				print("\nEl precio de este jugador actualmente es de : ", Fore.YELLOW + Style.BRIGHT + jugador["marketValue"])
 			else:
-				print(Fore.RED + Back.YELLOW + Style.BRIGHT +"\nEn estos momentos no podemos facilitar el precio del jugador.")			
+				print(Fore.YELLOW + Style.BRIGHT +"\nEn estos momentos no podemos facilitar el precio del jugador.")			
 				print(" ")	
-
+	if error<1:
+		input("\nNombre incorrecto! \nPulse Intro para continuar: ")
+		betis()
 def delanteros (): #Función delantero que nos muestra los delanteros que tiene el equipo del Arsenal.
 		
 	response = requests.get('http://api.football-data.org/v1/teams/57/players' ,
@@ -109,10 +119,15 @@ def delanteros (): #Función delantero que nos muestra los delanteros que tiene 
 	)
 	
 	data=response.json()
+	error=0
 	for jugador in data["players"]: #Recorremos los jugadores del arsenal
 		if jugador["position"] == "Centre-Forward": #El que coincidad con "Centre-Forward"(delantero)
 			print(" ")
 			print(Back.BLUE + Style.BRIGHT + Fore.YELLOW + jugador["name"]) #nos lo muestra
+			error+=1
+	if error<1:
+		input("\nNombre incorrecto! \nPulse Intro para continuar: ")
+		delanteros()
 
 def serieA (): #Función serieA que nos pide por teclado dos equipos y nos dice el resultado del partido que se ha jugado en casa del primer equipo introducido.
 		
@@ -129,6 +144,7 @@ def serieA (): #Función serieA que nos pide por teclado dos equipos y nos dice 
 	print(Back.BLUE + Style.BRIGHT + "Lista de equipos de la Liga italiana (Serie A)")
 	print(Back.BLUE + Style.BRIGHT + "··············································")	
 	print(" ")
+	error=0
 	for equipo in equipos["teams"]:
 		print(Fore.YELLOW + Style.BRIGHT + equipo["name"]) #Mostramos los equipos de la liga italiana
 	data=response.json()
@@ -140,6 +156,7 @@ def serieA (): #Función serieA que nos pide por teclado dos equipos y nos dice 
 				print(" ")
 				print(Fore.GREEN + Style.BRIGHT + "Ha ganado en su campo",equipolocal ,Fore.GREEN + Style.BRIGHT +"por", Fore.MAGENTA + str(partido["result"]["goalsHomeTeam"]),Fore.MAGENTA + "-",Fore.MAGENTA + str(partido["result"]["goalsAwayTeam"]))
 				print(" ")
+				error+=1
 			elif partido["result"]["goalsAwayTeam"] > partido["result"]["goalsHomeTeam"]: #Si el equipo local ha marcado menos goles que el visitante, ha perdido
 				print(" ")
 				print(Fore.GREEN + Style.BRIGHT + "El",equipolocal ,Fore.GREEN + Style.BRIGHT + "a perdido en su campo por", Fore.MAGENTA + str(partido["result"]["goalsHomeTeam"]),Fore.MAGENTA + "-",Fore.MAGENTA + str(partido["result"]["goalsAwayTeam"]))
@@ -148,6 +165,9 @@ def serieA (): #Función serieA que nos pide por teclado dos equipos y nos dice 
 				print(" ")
 				print(Fore.GREEN + Style.BRIGHT + "El resultado del partido es de un empate: ",Fore.MAGENTA + str(partido["result"]["goalsHomeTeam"]),Fore.MAGENTA + "-",Fore.MAGENTA + str(partido["result"]["goalsAwayTeam"]))
 				print(" ")
+	if error<1:
+		input("\nNombre incorrecto! \nPulse Intro para continuar: ")
+		serieA()
 
 def portuguesa (): #Función liga portuguesa que nos pide un equipo y mostramos la posicion y el número de puntos que tiene.
 		
@@ -164,6 +184,7 @@ def portuguesa (): #Función liga portuguesa que nos pide un equipo y mostramos 
 	print(Back.YELLOW + Style.BRIGHT + " Lista de equipos de la Liga portuguesa")
 	print(Back.YELLOW + Style.BRIGHT + ".......................................")
 	print(" ")
+	error=0
 	for equipo in data["standing"]:
 		print(Style.BRIGHT + Fore.GREEN + equipo["teamName"])
 	print("---------------------------------------")
@@ -173,7 +194,10 @@ def portuguesa (): #Función liga portuguesa que nos pide un equipo y mostramos 
 			print(" ")
 			print(Fore.MAGENTA + Style.BRIGHT + equipo["teamName"], "ha quedado en la posición", Fore.MAGENTA + str(equipo["position"]), "con", Fore.MAGENTA + str(equipo["points"]), "puntos.")
 			print(" ")
-
+			error+=1
+	if error<1:
+		input("\nNombre incorrecto! \nPulse Intro para continuar: ")
+		portuguesa()
 def puntos (): #Función puntos que muestra otro menú para comparar el nº de partidos ganados,perdidos o empatados según elijamos. Muestra una lista de equipos que han ganado,perdido o empatado más partidos que el número introducido.	
 	response = requests.get('http://api.football-data.org/v1/competitions/455/leagueTable' ,
 	headers={
@@ -264,20 +288,18 @@ def partido(): #función partido, según la estadística de los puntos y partido
 	print(Fore.MAGENTA + "Elige dos equipos de esta liga para que jueguen un partido: \n")
 	equipolocal=input("Introduce el primer equipo: ")
 	equipovisitante=input("Introduce el segundo equipo: ")
-	error=False
+	error=0 #iniciamos la variable a 0
 	for equipo in data["standing"]:
 		if equipo["teamName"]==equipolocal:
 			puntoslocal=equipo["points"]
 			perdidoslocal=equipo["draws"]
-			print("Puntos local: ",puntoslocal, perdidoslocal)
+			error+=1 #comprueba que el nombre del equipo es correcto y si es así suma 1
 		elif equipo["teamName"]==equipovisitante:
 			puntosvisit=equipo["points"]
 			perdidosvisit=equipo["draws"]
-			print("Puntos visitante:",puntosvisit,perdidosvisit)
-		else:
-			error=True
-	if error:
-		input("\nNombre de equipo incorrecto! \nPulse Intro para continuar: ")
+			error+=1 #Comprueba el segundo nombre y suma 1+1=2
+	if error<2: #Si alguno de los nombres no son correctos la suma es menor a 2, entonces nos lanza el error y nos muestra de nuevo el menú.
+		input("\nNombre incorrecto! \nPulse Intro para continuar: ")
 		partido()
 	else:
 		if puntoslocal > puntosvisit and perdidoslocal < perdidosvisit:
@@ -346,4 +368,3 @@ while True:
 		break #Salimos de la aplicación
 	else:
 		input(Fore.GREEN + Style.BRIGHT +"No has pulsado ninguna opción correcta...\nPulsa cualquier tecla para continuar") #En caso de no introducir una opción disponible nos muestra un error y vuelve al bucle.
-
